@@ -2,8 +2,6 @@
 
 let hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm']
 
-let cityArray = []
-
 let storeSales = document.getElementById("storeSales"); // this element id comes from the HTML doc
 
 // this is an object constructor function
@@ -51,18 +49,31 @@ function Store(name, min, max, avg) {
         storeSales.appendChild(li);
     }
 }
+
+let cityArray = [
+    new Store('Seattle', 23, 65, 6.3),
+    new Store('Tokyo', 3, 24, 1.2),
+    new Store('Dubai', 11, 38, 3.7),
+    new Store('Paris', 20, 38, 2.3),
+    new Store('Lima', 2, 16, 4.6),
+];
+
+for (let i = 0; i < cityArray.length; i++) {
+    cityArray[i].renderList();
+}
+
 // create INSTANCES of Store
-let seattle = new Store('Seattle', 23, 65, 6.3)
-let tokyo = new Store('Tokyo', 3, 24, 1.2)
-let dubai = new Store('Dubai', 11, 38, 3.7)
-let paris = new Store('Paris', 20, 38, 2.3)
-let lima = new Store('Lima', 2, 16, 4.6)
+// let seattle = new Store('Seattle', 23, 65, 6.3)
+// let tokyo = new Store('Tokyo', 3, 24, 1.2)
+// let dubai = new Store('Dubai', 11, 38, 3.7)
+// let paris = new Store('Paris', 20, 38, 2.3)
+// let lima = new Store('Lima', 2, 16, 4.6)
 // seattle.CPH()
-seattle.renderList()
-tokyo.renderList()
-dubai.renderList()
-paris.renderList()
-lima.renderList()
+// seattle.renderList()
+// tokyo.renderList()
+// dubai.renderList()
+// paris.renderList()
+// lima.renderList()
 
 // let seattleStore = {
 //     name: 'Seattle',
