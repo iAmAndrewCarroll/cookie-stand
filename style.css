@@ -1,14 +1,25 @@
-div {
+body {
     display: flexbox;
+    justify-content: center;
+    flex-flow: column;
+}
+
+main {
+    display: flex;
+    justify-content: center;
 }
 
 h1 {
     font-size: 8vw;
-    display: flexbox;
+    text-align: center;
 }
 
 table, th, td {
     border: 1px solid;
+}
+
+th:hover {
+    background-color: antiquewhite;
 }
 
 tr:hover {
