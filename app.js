@@ -8,7 +8,7 @@ let storeSales = document.getElementById("storeSales"); // this element id comes
 // this is the entry point to the DOM for the table
 let storeTable = document.getElementById("storeTable");
 
-// this is an object constructor function
+// this is an object constructor function (Store Constructor)
 // this.name = name; this.name is the property and name is the value
 function Store(name, min, max, avg) {
     this.name = name;
@@ -55,29 +55,44 @@ function Store(name, min, max, avg) {
     // I am creating a method within the object constructor
     this.renderTable = function () {
         this.CPH();
-        // create new element w/ content of city names and append to the row
-        let storeName = document.createElement('th')
-        storeTable.appendChild(storeName);
-        for (let i = 0; i < cityArray.length; i++) {
-            let td = document.createElement('td');
-            td.textContent = cityArray[i];
-            storeName.appendChild(td);
-        }
         // create table row
         let storeTr = document.createElement('tr')
         // append to table element
         storeTable.appendChild(storeTr);
+        // create new element w/ content of city names and append to the row
+        let storeName = document.createElement('th')
+        storeName.textContent = this.name;
+        storeTr.appendChild(storeName);
         for (let i = 0; i < hours.length; i++) {
             let td = document.createElement('td');
             td.textContent = this.cookiesPerHourArray[i];
             storeTr.appendChild(td);
         } 
+        let storeTotal = document.createElement('th')
+        storeTotal.textContent = this.dailyTotal;
+        storeTr.appendChild(storeTotal);
     }
 }
 
 // create the hours header
+let renderHeader = function () {
+    let hoursHeader = document.createElement('tr')
+    storeTable.appendChild(hoursHeader);
+    let emptyCell = document.createElement('th')
+    emptyCell.textContent = '';
+    hoursHeader.appendChild(emptyCell);
 
-//
+    for (let i = 0; i < hours.length; i++) {
+        let storeHours = document.createElement('th');
+        storeHours.textContent = hours[i];
+        hoursHeader.appendChild(storeHours);
+    }
+    let TotalHeader = document.createElement('th')
+    TotalHeader.textContent = `Daily Location Total`;
+    hoursHeader.appendChild(TotalHeader);
+}
+// create total label 
+
 
 let cityArray = [
     new Store('Seattle', 23, 65, 6.3),
@@ -86,7 +101,7 @@ let cityArray = [
     new Store('Paris', 20, 38, 2.3),
     new Store('Lima', 2, 16, 4.6),
 ];
-
+renderHeader()
 for (let i = 0; i < cityArray.length; i++) {
     cityArray[i].renderTable();
 }
