@@ -2,7 +2,11 @@
 
 let hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm']
 
+// this is the entry point to the DOM for the list
 let storeSales = document.getElementById("storeSales"); // this element id comes from the HTML doc
+
+// this is the entry point to the DOM for the table
+let storeTable = document.getElementById("storeTable");
 
 // this is an object constructor function
 // this.name = name; this.name is the property and name is the value
@@ -48,7 +52,32 @@ function Store(name, min, max, avg) {
         li.textContent = `Total: ${this.dailyTotal} cookies`;
         storeSales.appendChild(li);
     }
+    // I am creating a method within the object constructor
+    this.renderTable = function () {
+        this.CPH();
+        // create new element w/ content of city names and append to the row
+        let storeName = document.createElement('th')
+        storeTable.appendChild(storeName);
+        for (let i = 0; i < cityArray.length; i++) {
+            let td = document.createElement('td');
+            td.textContent = cityArray[i];
+            storeName.appendChild(td);
+        }
+        // create table row
+        let storeTr = document.createElement('tr')
+        // append to table element
+        storeTable.appendChild(storeTr);
+        for (let i = 0; i < hours.length; i++) {
+            let td = document.createElement('td');
+            td.textContent = this.cookiesPerHourArray[i];
+            storeTr.appendChild(td);
+        } 
+    }
 }
+
+// create the hours header
+
+//
 
 let cityArray = [
     new Store('Seattle', 23, 65, 6.3),
@@ -59,7 +88,7 @@ let cityArray = [
 ];
 
 for (let i = 0; i < cityArray.length; i++) {
-    cityArray[i].renderList();
+    cityArray[i].renderTable();
 }
 
 // create INSTANCES of Store
