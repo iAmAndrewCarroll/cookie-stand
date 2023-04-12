@@ -67,7 +67,7 @@ function Store(name, min, max, avg) {
             let td = document.createElement('td');
             td.textContent = this.cookiesPerHourArray[i];
             storeTr.appendChild(td);
-        } 
+        }
         let storeTotal = document.createElement('th')
         storeTotal.textContent = this.dailyTotal;
         storeTr.appendChild(storeTotal);
@@ -81,17 +81,29 @@ let renderHeader = function () {
     let emptyCell = document.createElement('th')
     emptyCell.textContent = '';
     hoursHeader.appendChild(emptyCell);
-
     for (let i = 0; i < hours.length; i++) {
         let storeHours = document.createElement('th');
         storeHours.textContent = hours[i];
         hoursHeader.appendChild(storeHours);
     }
+    // create Daily Location Total label 
     let TotalHeader = document.createElement('th')
     TotalHeader.textContent = `Daily Location Total`;
     hoursHeader.appendChild(TotalHeader);
 }
-// create total label 
+// create Daily Hourly Total label
+let renderFooter = function () {
+    let DailyHourlyTotal = document.createElement('tr')
+    storeTable.appendChild(DailyHourlyTotal);
+    let totalLower = document.createElement('th')
+    totalLower.textContent = 'Total';
+    storeTable.appendChild(totalLower);
+    for (let i = 0; i < hours.length; i++) {
+        for (let j = 0; j < cookiesPerHourArray.length; j++) {
+            let DailyTotal = sum(j)
+        }
+    }
+}
 
 
 let cityArray = [
@@ -105,6 +117,8 @@ renderHeader()
 for (let i = 0; i < cityArray.length; i++) {
     cityArray[i].renderTable();
 }
+renderFooter()
+
 
 // create INSTANCES of Store
 // let seattle = new Store('Seattle', 23, 65, 6.3)
