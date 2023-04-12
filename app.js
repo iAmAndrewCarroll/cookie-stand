@@ -93,16 +93,25 @@ let renderHeader = function () {
 }
 // create Daily Hourly Total label
 let renderFooter = function () {
-    let DailyHourlyTotal = document.createElement('tr')
+    let DailyHourlyTotal = document.createElement('tr');
     storeTable.appendChild(DailyHourlyTotal);
-    let totalLower = document.createElement('th')
+    let totalLower = document.createElement('th');
     totalLower.textContent = 'Total';
-    storeTable.appendChild(totalLower);
+    DailyHourlyTotal.appendChild(totalLower);
     for (let i = 0; i < hours.length; i++) {
-        for (let j = 0; j < cookiesPerHourArray.length; j++) {
-            let DailyTotal = sum(j)
+        let hourlyTotal = 0;
+        for (let j = 0; j < cityArray.length; j++) {
+            hourlyTotal += cityArray[j].cookiesPerHourArray[i];
         }
+        let hourlyRow = document.createElement('th');
+        hourlyRow.textContent = hourlyTotal;
+        DailyHourlyTotal.appendChild(hourlyRow);
+        console.log(hourlyTotal);
     }
+    let totalTotal = document.createElement('th');
+    totalTotal.textContent = sum(hourlyTotal);
+    DailyHourlyTotal.appendChild(totalTotal);
+    
 }
 
 
