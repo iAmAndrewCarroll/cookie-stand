@@ -2,13 +2,15 @@
 
 let hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm']
 
+let form = document.getElementById("addLocationForm");
+
 // this is the entry point to the DOM for the list
 let storeSales = document.getElementById("storeSales"); // this element id comes from the HTML doc
 
 // this is the entry point to the DOM for the table
 let storeTable = document.getElementById("storeTable");
 
-// this is an object constructor function (Store Constructor)
+// this is an OBJECT CONSTRUCTOR FUNCTION (Store Constructor)
 // this.name = name; this.name is the property and name is the value
 function Store(name, min, max, avg) {
     this.name = name;
@@ -17,13 +19,17 @@ function Store(name, min, max, avg) {
     this.avg = avg;
     this.cookiesPerHourArray = []
     this.dailyTotal = 0;
-    this.generateRandoCookies = function () {
+}
+
+    // this is attaching a method to the constructor function Store
+    Store.prototype.generateRandomCustomers = function () {
         return Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
     };
-    this.CPH = function () {
+
+    Store.prototype.calculateCookiesPerHour = function () {
         // console.log(`this is xyz`)
         for (let i = 0; i < hours.length; i++) {
-            let RandoCustomers = this.generateRandoCookies();
+            let RandoCustomers = this.generateRandomCustomers();
             // math.ceil rounds up & math.floor rounds down
             let cookiesPerHour = Math.round(RandoCustomers * this.avg);
             // console.log('cPH', cookiesPerHour)
@@ -33,28 +39,30 @@ function Store(name, min, max, avg) {
             this.dailyTotal += cookiesPerHour;
         }
     }
-    this.renderList = function () {
-        this.CPH();
-        let h2StoreName = document.createElement('h2');
-        h2StoreName.textContent = `${this.name}`;
-        storeSales.appendChild(h2StoreName);
-        for (let i = 0; i < hours.length; i++) {
-            // create the li element in html doc
-            let li = document.createElement('li');
-            // get the li content from within the function
-            li.textContent = `${hours[i]}: ${this.cookiesPerHourArray[i]} cookies`;
-            // append list item elements
-            // the variable for the parent is seattleContainer
-            storeSales.appendChild(li);
-        }
-        // returns the daily total and is not inside the loop because it only needs to run once the loop is complete
-        let li = document.createElement('li');
-        li.textContent = `Total: ${this.dailyTotal} cookies`;
-        storeSales.appendChild(li);
-    }
+
+    // Store.prototype.renderList = function () {
+    //     this.calculateCookiesPerHour();
+    //     let h2StoreName = document.createElement('h2');
+    //     h2StoreName.textContent = `${this.name}`;
+    //     storeSales.appendChild(h2StoreName);
+    //     for (let i = 0; i < hours.length; i++) {
+    //         // create the li element in html doc
+    //         let li = document.createElement('li');
+    //         // get the li content from within the function
+    //         li.textContent = `${hours[i]}: ${this.cookiesPerHourArray[i]} cookies`;
+    //         // append list item elements
+    //         // the variable for the parent is seattleContainer
+    //         storeSales.appendChild(li);
+    //     }
+    //     // returns the daily total and is not inside the loop because it only needs to run once the loop is complete
+    //     let li = document.createElement('li');
+    //     li.textContent = `Total: ${this.dailyTotal} cookies`;
+    //     storeSales.appendChild(li);
+    // }
+
     // I am creating a method within the object constructor
-    this.renderTable = function () {
-        this.CPH();
+    Store.prototype.renderTable = function () {
+        this.calculateCookiesPerHour();
         // create table row
         let storeTr = document.createElement('tr')
         // append to table element
@@ -72,7 +80,6 @@ function Store(name, min, max, avg) {
         storeTotal.textContent = this.dailyTotal;
         storeTr.appendChild(storeTotal);
     }
-}
 
 // create the hours header
 let renderHeader = function () {
@@ -91,13 +98,16 @@ let renderHeader = function () {
     TotalHeader.textContent = `Daily Location Total`;
     hoursHeader.appendChild(TotalHeader);
 }
+
+let footerRow = document.createElement('tr');
+
 // create Daily Hourly Total label
 let renderFooter = function () {
-    let DailyHourlyTotal = document.createElement('tr');
-    storeTable.appendChild(DailyHourlyTotal);
+    footerRow.innerHTML = '';
+    storeTable.appendChild(footerRow);
     let totalLower = document.createElement('th');
     totalLower.textContent = 'Total';
-    DailyHourlyTotal.appendChild(totalLower);
+    footerRow.appendChild(totalLower);
     let totalTotal = 0;
     for (let i = 0; i < hours.length; i++) {
         let hourlyTotal = 0;
@@ -106,16 +116,31 @@ let renderFooter = function () {
         }
         let hourlyRow = document.createElement('th');
         hourlyRow.textContent = hourlyTotal;
-        DailyHourlyTotal.appendChild(hourlyRow);
+        footerRow.appendChild(hourlyRow);
         totalTotal += hourlyTotal;
         // console.log(totalTotal)
         // console.log(hourlyTotal);
     }
     let AllTotal = document.createElement('th');
     AllTotal.textContent = (totalTotal);
-    DailyHourlyTotal.appendChild(AllTotal);
+    footerRow.appendChild(AllTotal);
 }
 
+function handleFormSubmit(event) {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const min = parseInt(event.target.minCustomers.value);
+    const max = parseInt(event.target.maxCustomers.value);
+    const avgSales = parseFloat(event.target.avgSales.value);
+    let newStore = new Store(name, min, max, avgSales);
+    console.log('form submitted')
+    event.target.name.value = null;
+    event.target.minCustomers.value = null;
+    event.target.maxCustomers.value = null;
+    event.target.avgSales.value = null;
+    newStore.renderTable()
+    renderFooter()
+}
 
 let cityArray = [
     new Store('Seattle', 23, 65, 6.3),
@@ -129,6 +154,10 @@ for (let i = 0; i < cityArray.length; i++) {
     cityArray[i].renderTable();
 }
 renderFooter()
+
+form.addEventListener('submit', handleFormSubmit)
+
+
 
 // // NOTES???
 

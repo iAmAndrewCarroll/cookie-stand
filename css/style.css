@@ -2,16 +2,64 @@ body {
     display: flexbox;
     justify-content: center;
     flex-flow: column;
+    border: 1px solid blue;
 }
 
 main {
     display: flex;
+    margin: auto;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
 h1 {
     font-size: 8vw;
     text-align: center;
+}
+
+form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+form > div {
+    margin: auto;
+    flex-wrap: wrap;
+    margin-top: 15px;
+
+}
+
+fieldset > legend {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    font-size: larger;
+    font-weight: bold;
+    padding-bottom: 15px;
+    padding-top: 10px;
+}
+
+fieldset > label {
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+fieldset > label:nth-child(8) {
+    margin-right: 0px;
+}
+
+fieldset > label:nth-child(9) {
+    margin-left: 0px;
+}
+
+fieldset {
+    display: flex;
+    font-size: large;
+    font-weight: bold;
+    margin: auto;
+    justify-content:space-around;
 }
 
 table, th, td {
