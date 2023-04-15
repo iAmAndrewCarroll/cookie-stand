@@ -2,6 +2,8 @@
 
 let hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm']
 
+// 1st step in event handling
+// saving an element from our HTML as a JavaScript DOM object
 let form = document.getElementById("addLocationForm");
 
 // this is the entry point to the DOM for the list
@@ -126,7 +128,10 @@ let renderFooter = function () {
     footerRow.appendChild(AllTotal);
 }
 
+// 3rd step in event handling
+// the code that is triggered in response to an event
 function handleFormSubmit(event) {
+    // preventDefault stops JS from running its foundation code which will not store the data
     event.preventDefault();
     const name = event.target.name.value;
     const min = parseInt(event.target.minCustomers.value);
@@ -138,6 +143,7 @@ function handleFormSubmit(event) {
     event.target.minCustomers.value = null;
     event.target.maxCustomers.value = null;
     event.target.avgSales.value = null;
+    cityArray.push(newStore);
     newStore.renderTable()
     renderFooter()
 }
@@ -155,6 +161,10 @@ for (let i = 0; i < cityArray.length; i++) {
 }
 renderFooter()
 
+// 2nd step in event handling
+// adding an event listener
+// the event type as a string
+//the name of the function that we want to be triggered in response to the event
 form.addEventListener('submit', handleFormSubmit)
 
 

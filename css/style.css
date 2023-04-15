@@ -2,7 +2,6 @@ body {
     display: flexbox;
     justify-content: center;
     flex-flow: column;
-    border: 1px solid blue;
 }
 
 main {
@@ -46,20 +45,10 @@ fieldset > label {
     margin-right: 10px;
 }
 
-fieldset > label:nth-child(8) {
-    margin-right: 0px;
-}
-
-fieldset > label:nth-child(9) {
-    margin-left: 0px;
-}
-
 fieldset {
     display: flex;
     font-size: large;
     font-weight: bold;
-    margin: auto;
-    justify-content:space-around;
 }
 
 table, th, td {
