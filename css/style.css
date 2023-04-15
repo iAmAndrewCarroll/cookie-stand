@@ -4,6 +4,10 @@ body {
     flex-flow: column;
 }
 
+header {
+    padding-top: 35px;
+}
+
 main {
     display: flex;
     margin: auto;
@@ -14,6 +18,7 @@ main {
 h1 {
     font-size: 8vw;
     text-align: center;
+    font-family: 'Astloch', cursive;
 }
 
 form {
@@ -73,7 +78,9 @@ th {
 
 td {
     font-size: 1.2vw;
-    text-align: center;    
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(146, 60, 32);    
 }
 
 footer {

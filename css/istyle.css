@@ -6,6 +6,7 @@ body {
     padding: 0;
     margin: 0;
     color: #142632;
+    background-color: antiquewhite;
 }
 
 a {
@@ -20,7 +21,7 @@ header {
 }
 
 nav {
-    border: 2px blue solid;
+    /* border: 2px blue solid; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -69,6 +70,8 @@ main > section {
     flex-wrap: wrap;
     margin: auto;
     margin-top: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color
 }
 
 main > section >:nth-child(1) {
@@ -95,14 +98,21 @@ main > section >:nth-child(5) {
     height: 400px;
 }
 
+
+article > h1 {
+    font-family: 'Astloch', cursive;
+    color:#4c586f
+}
+
 article > section {
-    background-color: lightgrey;
+    background-color: rgb(120, 120, 120);
 }
 
 article > section > a > h2 {
     font-size: larger;
     font-weight: bold;
     margin: 5px 0 3px 0;
+    color: darksalmon;
 }
 
 article > section > a:not(:first-child) > h2 {
@@ -135,7 +145,7 @@ article {
 }
 
 article section {
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     height: 320px;
     overflow: scroll;
     word-wrap: break-word;
